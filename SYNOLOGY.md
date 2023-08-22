@@ -6,7 +6,9 @@ are the steps required to install the script and dependencies.
 
 ### Install Perl
 
-Go to Package Center and install official Perl package.
+Go to Package Center and install the official Perl package.
+
+<img width="786" alt="Screenshot 2023-08-21 at 9 27 21 PM" src="https://github.com/greatvovan/exif2db/assets/4903007/51b0c6f7-d2fb-48db-81bf-b3ff81ae29b1">
 
 ### SSH into your box
 
@@ -38,7 +40,7 @@ recommend running anything as superuser unless absolutely required.
 
 ### Install virtualenv (optional)
 
-Try to skip this step and use build-in `venv`. If it fails, install
+Try to skip this step and use built-in `venv`. If it fails, install
 [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 and use it instead of `venv`.
 
