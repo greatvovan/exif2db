@@ -1,2 +1,4 @@
+tqdm
 Pillow
+pi-heif
 PyExifTool
