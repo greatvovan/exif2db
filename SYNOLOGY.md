@@ -52,7 +52,7 @@ and use it instead of `venv`.
 
 ```commandline
 git clone git@github.com:greatvovan/exif2db.git
-rsync exif2db -vrt --delete user@10.0.0.10:.
+rsync exif2db/exif2db exif2db/requirements.txt -vrt --exclude __pycache__ --exclude .DS_Store --delete user@10.0.0.10:exif2db
 ```
 
 > **<!>** In order to use rsync, make sure it is enabled in
@@ -60,12 +60,11 @@ Control Panel --> File Services --> rsync
 
 <img width="738" alt="image" src="https://github.com/greatvovan/exif2db/assets/4903007/ffcb2d52-c97f-4de9-95f7-2a2d7b59ff3c">
 
----
+> (i)
 Remember, rsync on Synology is a weird thing. It has its own users
 and passwords that have to be enabled in DSM as of version 7.2.
 I could only make it work with the same password as the main user,
 and it worked only after service restart.
----
 
 Alternatively, if you have Git on your box, you can clone it
 right away, or you can copy the directory through one of your
