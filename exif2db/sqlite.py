@@ -81,19 +81,28 @@ class Sqlite(Db):
         self.init_metadata()
 
     def add_file(self, path: Path):
+        self.file_num += 1
+        self.add_file_raw(self.file_num, str(path), 0)
+
+    def add_file_raw(self, id_: int, path: str, processed: int):
         if logger.level <= logging.DEBUG:
             logger.debug(f'Adding {path}...')
 
-        self.file_num += 1
-        self.cur.execute('INSERT INTO files VALUES (?, ?, ?)', (self.file_num, str(path), 0))
+        self.cur.execute('INSERT INTO files VALUES (?, ?, ?)', (id_, path, processed))
 
     def add_metadata(self, file_id: int, fi: FileInfo, exif: ExifData, method: str):
+        self.add_metadata_raw((file_id, method) + dataclasses.astuple(fi) + dataclasses.astuple(exif))
+        self.set_file_processed(file_id)
+
+    def add_metadata_raw(self, row: tuple):
         if logger.level <= logging.DEBUG:
-            logger.debug(f'Adding metadata for file ID {file_id}...')
+            logger.debug(f'Adding metadata for file ID {row[0]}...')
 
         self.cur.execute('INSERT INTO metadata VALUES '
                          '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                         (file_id, method) + dataclasses.astuple(fi) + dataclasses.astuple(exif))
+                         row)
+
+    def set_file_processed(self, file_id: int):
         self.cur.execute('UPDATE files SET processed = 1 WHERE id = ?', (file_id,))
 
     def commit(self):
@@ -119,3 +128,17 @@ class Sqlite(Db):
 
     def get_max_file_id(self):
         return self.db.execute('SELECT max(id) FROM files').fetchone()[0]
+
+    def get_all_raw(self):
+        cur = self.db.execute('''
+            SELECT f.*, m.*
+            FROM files f
+            LEFT JOIN metadata m ON f.id = m.id
+        ''')
+        rows = cur.fetchmany()
+        while rows:
+            for r in rows:
+                yield r
+            rows = cur.fetchmany()
+        cur.close()
+
