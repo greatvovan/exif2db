@@ -4,6 +4,7 @@ from PIL import Image
 from PIL.ExifTags import Base, GPS, IFD
 from PIL.TiffImagePlugin import IFDRational
 from pi_heif import register_heif_opener
+import pillow_avif
 from ..types import ExifData, ExifReader, Method, DEFAULT_EXIF_DATA
 from ..utils import dms2dd, parse_exif_date
 

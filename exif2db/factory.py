@@ -14,7 +14,7 @@ class Factory:
         file_ext = file_ext.lower()
 
         if file_ext in ('.jpg', '.jpeg', '.heic', '.png', '.tiff', '.tif', '.bmp', '.crw',
-                        '.gif', '.psd', '.nef'):
+                        '.gif', '.psd', '.nef', '.avif'):
             if logger.level <= logging.DEBUG:
                 logger.debug(f'Returning {ExifReader_Combined.__name__} for {file_ext}')
             return ExifReader_Combined
