@@ -71,11 +71,14 @@ class ExifReader_Pillow(ExifReader):
         if c is None or ref is None:
             return None
 
-        if c is tuple:
+        if type(c) is tuple:
             return dms2dd(c[0], c[1], c[2], ref)
 
-        if c is IFDRational:
+        if type(c) is IFDRational:
             res = float(c)
             if ref in ('S', 'W'):
                 res = -res
             return res
+
+        logger.warning('Unexpected EXIF GPS content')
+        return None
