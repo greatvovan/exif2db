@@ -1,4 +1,5 @@
 tqdm
 Pillow
 pi-heif
+pillow-avif-plugin
 PyExifTool
