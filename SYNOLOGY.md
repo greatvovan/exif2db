@@ -17,7 +17,7 @@ on you NAS, enable it in *Control Panel* --> *Services & SNMP*.
 
 <img width="663" alt="Screenshot 2023-08-22 at 7 08 23 PM" src="https://github.com/greatvovan/exif2db/assets/4903007/3e4eac5d-c946-4dce-bbe5-d9a66b45acd6">
 
-### Install Exifttool
+### Install Exiftool
 
 Check the [oficcial site](https://exiftool.org/install.html#Unix)
 for the latest version and fix command accordingly.
